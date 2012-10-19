@@ -53,8 +53,6 @@ class HolySQL {
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
 
-        DebugADD("SQL запросов");
-
         $table = $this->table;
 
         if (($type == "TEXT") || ($type == "LONGTEXT"))
@@ -65,7 +63,6 @@ class HolySQL {
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
 
-        DebugAddValue('команды', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
@@ -80,13 +77,10 @@ class HolySQL {
      * @return bool результат запроса
      */
     function RenameColumn($oldname, $newname, $type) {
-        DebugADD("SQL запросов");
 
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-
-        DebugADD("SQL запросов");
 
         $table = $this->table;
 
@@ -95,7 +89,6 @@ class HolySQL {
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
 
-        DebugAddValue('команды', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
@@ -112,8 +105,6 @@ class HolySQL {
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
 
-        DebugADD("SQL запросов");
-
         $table = $this->table;
 
         $query = "ALTER TABLE `" . $table . "` DROP `" . $name . "`";
@@ -121,7 +112,6 @@ class HolySQL {
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
 
-        DebugAddValue('команды', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
@@ -167,7 +157,6 @@ class HolySQL {
      * @param int $page  <p>страница постраничной</p>
      */
     function Select($where = "1", $order_by = "sort ASC", $what = "*", $count_on_page = 0, $page = 0) {
-        DebugADD("SQL запросов");
 
         $table = $this->table;
 
@@ -217,8 +206,6 @@ class HolySQL {
         $this->current_index = $query;
 
         if (!isset($holy_sql_cache[$query])) {
-            DebugADD("SQL запросов");
-            DebugAddValue('команды', $query);
             $this->res = mysql_query($query);
             if ($this->res) {
                 while ($row = mysql_fetch_array($this->res)) {
@@ -329,7 +316,6 @@ class HolySQL {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
 
         $table = $this->table;
 
@@ -357,7 +343,6 @@ class HolySQL {
         $query = "INSERT INTO " . $table . " (" . $names . ") VALUES (" . $value_names . ")";
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
-        DebugAddValue('команды', $query);
         $this->ClearCache();
         $_tmp = mysql_query($query);
         $this->last_id = mysql_insert_id();
@@ -375,7 +360,6 @@ class HolySQL {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
 
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
@@ -385,8 +369,6 @@ class HolySQL {
         $this->current_index = $query;
 
         if (!isset($holy_sql_cache[$query])) {
-            DebugADD("SQL запросов");
-            DebugAddValue('команды', $query);
             //echo "<HR>1:".$query.":2<HR>";
             $this->res = mysql_query($query);
             if (($this->res) && (strpos($query, 'CREATE TABLE') === FALSE) && (strpos($query, 'DROP TABLE') === FALSE)) {
@@ -428,7 +410,6 @@ class HolySQL {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
 
         $table = $this->table;
 
@@ -468,7 +449,6 @@ class HolySQL {
 
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
-        DebugAddValue('команды', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
@@ -494,7 +474,6 @@ class HolySQL {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
 
         if ($where == "") {
             return false;
@@ -520,7 +499,6 @@ class HolySQL {
 
             if ($this->debug)
                 echo "<pre>" . $query . "</pre>";
-            DebugAddValue('команды', $query);
             $this->ClearCache();
             return mysql_query($query);
         }
